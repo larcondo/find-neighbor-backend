@@ -1,0 +1,53 @@
+###################### GET ###################### 
+GET http://localhost:3002/tables
+
+###
+GET http://localhost:3002/pieces
+
+###
+GET http://localhost:3002/game/initial-pieces/cb77963a762775ff
+
+###
+GET http://localhost:3002/game/board-status/9baa143dc85c4efa
+
+
+###
+GET http://localhost:3002/piece/39e8a4e7
+
+
+###################### POST ######################
+POST http://localhost:3002/game/reset-board/9baa143dc85c4efa
+
+###
+POST http://localhost:3002/game/start
+Content-Type: application/json
+
+{
+  "playerName": "Franco"
+}
+
+###
+POST http://localhost:3002/game/join
+Content-Type: application/json
+
+{
+  "playerName": "Bruno",
+  "gameId": "cb77963a762775ff"
+}
+
+###
+POST http://localhost:3002/game/add-piece
+Content-Type: application/json
+
+{
+  "piece_id": "1b17e53c",
+  "partida": "cb77963a762775ff",
+  "playerRole": "player1"
+}
+
+### 3cb99505
+### 5a2c2984
+### ecae9301
+### 63fe4625
+###################### DELETE ######################
+DELETE http://localhost:3002/pieces
