@@ -1,5 +1,5 @@
 const sqlite3 = require('sqlite3').verbose();
-const DB_NAME = 'myDatabase.db';
+const DB_NAME = './data/myDatabase.db';
 const { generarId, arrayToText } = require('./src/utils/general');
 const { TOTAL_PIECES } = require('./src/utils/constants');
  
@@ -192,6 +192,19 @@ const emptyDeck = (partida) => {
   });
 };
 
+const emptyGame = (partida) => {
+  const DELETE_QUERY = `DELETE FROM game_data WHERE game_id=?`;
+  return new Promise((resolve, reject) => {
+    db.run(DELETE_QUERY,[partida], function(err) {
+      if(err) {
+        reject(err);
+      } else {
+        resolve({ message: `Partida finalizada. Game ID: ${partida}.` })
+      }
+    });
+  });
+}
+
 const initializeGame = ({ playerId, playerName, playerRole, gameId }) => {
   const INSERT_QUERY = `
     INSERT INTO game_data (id, game_id, player_name, player_role)
@@ -259,4 +272,5 @@ module.exports = {
   changeOwner,
   boardStatus,
   emptyDeck,
+  emptyGame,
 };

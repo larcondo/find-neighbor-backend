@@ -1,5 +1,14 @@
 const express = require('express');
 const app = express();
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require('socket.io');
+const io = new Server(server, {
+  cors: {
+    origin: ['http://192.168.100.8:5173', 'http://localhost:5173'],
+    methods: ['GET', 'POST'],
+  }
+});
 const cors = require('cors');
 
 // Controllers
@@ -11,7 +20,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send('Home page');
+  res.send('<h1>Find neighbor</h1>');
 });
 
 app.get('/tables', tablesController.tables);
@@ -27,4 +36,31 @@ app.post('/game/join', gameController.joinToGame);
 app.post('/game/add-piece', gameController.addPiece);
 app.post('/game/reset-board/:partida', gameController.resetGameDeck);
 
-module.exports = app;
+// handlers
+const registerNewGameHandler = require('./src/socket-io/newGame');
+const registerJoinGameHandler = require('./src/socket-io/joinGame');
+const registerAddPieceHandler = require('./src/socket-io/addPiece');
+
+const { emptyDeck, emptyGame } = require('./database');
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.on('disconnect', (reason) => {
+    console.log('user disconnected:', reason);
+  });
+
+  registerNewGameHandler(io, socket);
+  registerJoinGameHandler(io, socket);
+  registerAddPieceHandler(io, socket);
+
+  socket.on('finalizar', async (partida) => {
+
+    await emptyDeck(partida);
+    await emptyGame(partida);
+
+    io.emit('finalizar', { partida: null });
+  });
+
+});
+
+module.exports = server;

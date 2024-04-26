@@ -2,4 +2,7 @@ node_modules
 
 # Databases
 *.db
+data
+
+# Docs
 docs
