@@ -41,8 +41,7 @@ app.post('/game/reset-board/:partida', gameController.resetGameDeck);
 const registerNewGameHandler = require('./src/socket-io/newGame');
 const registerJoinGameHandler = require('./src/socket-io/joinGame');
 const registerAddPieceHandler = require('./src/socket-io/addPiece');
-
-const { emptyDeck, emptyGame } = require('./database');
+const registerEndGameHandler = require('./src/socket-io/endGame');
 
 io.on('connection', (socket) => {
   console.log('a user connected');
@@ -53,14 +52,7 @@ io.on('connection', (socket) => {
   registerNewGameHandler(io, socket);
   registerJoinGameHandler(io, socket);
   registerAddPieceHandler(io, socket);
-
-  socket.on('finalizar', async (partida) => {
-
-    await emptyDeck(partida);
-    await emptyGame(partida);
-
-    io.emit('finalizar', { partida: null });
-  });
+  registerEndGameHandler(io, socket);
 
 });
 
