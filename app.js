@@ -3,10 +3,11 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require('socket.io');
+const configCors = require('./config/cors');
 const io = new Server(server, {
   cors: {
-    origin: ['http://192.168.100.8:5173', 'http://localhost:5173'],
-    methods: ['GET', 'POST'],
+    origin: configCors.whitelist,
+    methods: configCors.methods,
   }
 });
 const cors = require('cors');
