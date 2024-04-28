@@ -20,9 +20,7 @@ const gameController = require('./src/controllers/game');
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('<h1>Find neighbor</h1>');
-});
+app.use(express.static('dist'));
 
 app.get('/tables', tablesController.tables);
 app.get('/pieces', piecesController.allPieces);
