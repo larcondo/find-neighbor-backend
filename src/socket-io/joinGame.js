@@ -10,10 +10,9 @@ const { textToArray } = require('../utils/general')
 
 const joinGameHandler = (io, socket) => {
   const unirseAPartida = async (playerName, partida) => {
-    console.log(`${playerName} quiere unirse a la partida ${partida}`);
-
     const playerId = generarId();
     const playerRole = 'player2';
+    const room = `room:${partida}`;
 
     await initializeGame({ playerId, playerName, playerRole, gameId: partida });
     await initializeDeck(partida);
@@ -34,7 +33,6 @@ const joinGameHandler = (io, socket) => {
     await changeOwner('player2', partida, idsPieces2);
  
     const newPartida = await getGamesByGameId(partida);
-    console.log(newPartida)
 
     const gameStatus = {
       partida,
@@ -50,7 +48,9 @@ const joinGameHandler = (io, socket) => {
       turn: 'player1',
     }
 
-    io.emit('unirse-partida', gameStatus);
+    console.log(`Event: unirse-partida | to: ${room} | from: ${socket.id}`);
+    socket.join(room);
+    io.to(room).emit('unirse-partida', gameStatus);
   }
 
   socket.on('unirse-partida', unirseAPartida);

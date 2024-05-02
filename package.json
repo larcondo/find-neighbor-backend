@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "update:ui": "rm -rf dist && cp -r ../frontend/dist dist",
     "test": "jest --verbose"
   },
   "author": "larcondo",

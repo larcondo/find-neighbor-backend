@@ -41,7 +41,8 @@ const addPieceHandler = (io, socket) => {
       },
     }
 
-    io.emit('add-piece', newGameStatus);
+    console.log(`Event: add-piece | to: room:${partida} | from: ${socket.id}`);
+    io.to(`room:${partida}`).emit('add-piece', newGameStatus);
   }
 
   socket.on('add-piece', agregarPieza);
