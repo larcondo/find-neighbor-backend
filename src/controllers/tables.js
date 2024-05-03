@@ -5,7 +5,7 @@ const tables = async (req, res) => {
     const resultado = await getTables();
     res.status(200).send(
       {
-        tablas: resultado.map(t => 
+        tablas: resultado.map(t =>
           ({ type: t.type, name: t.name })
         )
       }
@@ -18,4 +18,4 @@ const tables = async (req, res) => {
 
 module.exports = {
   tables,
-}
+};

@@ -1,4 +1,4 @@
-const BoardArray = [...Array(100).keys()]
+const BoardArray = [...Array(100).keys()];
 
 const TOTAL_PIECES = [
   { id: '19a321f9', tipo: 'L1', valores: [1,11,12] },
@@ -76,19 +76,4 @@ module.exports = {
   BoardArray,
   TOTAL_PIECES,
   TOTAL_PIECES_V2,
-}
-
-/**
- * BACKEND
- * 
- * - Tabla con fichas iniciales (ordenadas o no)
- * 
- * Iniciar Partida:
- * - Tabla de jugador con nombre y datos
- * - Tabla con piezas de cada jugador (puede ser 1 tabla donde cada ficha esté asociada a cada jugador)
- * - Tabla con deck (inicialmente completo con las fichas iniciales - no se pueden agregar fichas)
- * - Tabla con tablero actual (inicialmente vacio)
- * 
- * 
- * 
- */
+};

@@ -32,12 +32,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -51,12 +51,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -70,12 +70,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -89,12 +89,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -108,12 +108,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -127,12 +127,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -146,12 +146,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -165,12 +165,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -184,12 +184,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -203,12 +203,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -222,12 +222,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -241,12 +241,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -260,12 +260,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -279,12 +279,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -298,12 +298,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -317,12 +317,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -336,12 +336,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -355,12 +355,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -374,12 +374,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -393,12 +393,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -412,12 +412,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -431,12 +431,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -450,12 +450,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -469,12 +469,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -488,12 +488,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -507,12 +507,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -526,12 +526,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -545,12 +545,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -564,12 +564,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -583,12 +583,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -602,12 +602,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -621,12 +621,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });
@@ -640,12 +640,12 @@ describe('es posible agregar pieza', () => {
     const noPosibles = TOTAL_PIECES.filter((p, i) => ![pieceNumber, ...neighbors].includes(i)).map(p => p.valores);
 
     posibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(true);
     });
-    
+
     noPosibles.forEach(p => {
-      const res = addPiezaIsPossible(board, p); 
+      const res = addPiezaIsPossible(board, p);
       expect(res).toBe(false);
     });
   });

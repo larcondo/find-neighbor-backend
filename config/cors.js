@@ -8,4 +8,4 @@ const methods = ['GET', 'POST'];
 module.exports = {
   whitelist,
   methods,
-}
+};

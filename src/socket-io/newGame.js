@@ -33,9 +33,9 @@ const newGameHandler = (io, socket) => {
     console.log(`Event: nueva-partida | to: $s{room} | from: ${socket.id}`);
     socket.join(room);
     io.to(room).emit('nueva-partida', values);
-  }
+  };
 
   socket.on('nueva-partida', crearPartida);
-}
+};
 
 module.exports = newGameHandler;

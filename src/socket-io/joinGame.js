@@ -6,7 +6,7 @@ const {
   getGamesByGameId,
   changeOwner,
 } = require('../../database');
-const { textToArray } = require('../utils/general')
+const { textToArray } = require('../utils/general');
 
 const joinGameHandler = (io, socket) => {
   const unirseAPartida = async (playerName, partida) => {
@@ -19,19 +19,19 @@ const joinGameHandler = (io, socket) => {
     const deck = await getPlayerPieces(partida);
 
     const p1pieces = deck.slice(0,8)
-      .map(p => ({...p, valores: textToArray(p.valores)}));
-    
+      .map(p => ({ ...p, valores: textToArray(p.valores) }));
+
     const p2pieces = deck.slice(8,16)
-      .map(p => ({...p, valores: textToArray(p.valores)}));
+      .map(p => ({ ...p, valores: textToArray(p.valores) }));
 
     const idsToP1 = p1pieces.map(p => p.piece_id);
-    const idsPieces1 = "('" + idsToP1.join("', '") + "')";
+    const idsPieces1 = '("' + idsToP1.join('", "') + '")';
     const idsToP2 = p2pieces.map(p => p.piece_id);
-    const idsPieces2 = "('" + idsToP2.join("', '") + "')";
+    const idsPieces2 = '("' + idsToP2.join('", "') + '")';
 
     await changeOwner('player1', partida, idsPieces1);
     await changeOwner('player2', partida, idsPieces2);
- 
+
     const newPartida = await getGamesByGameId(partida);
 
     const gameStatus = {
@@ -46,14 +46,14 @@ const joinGameHandler = (io, socket) => {
       },
       board: [],
       turn: 'player1',
-    }
+    };
 
     console.log(`Event: unirse-partida | to: ${room} | from: ${socket.id}`);
     socket.join(room);
     io.to(room).emit('unirse-partida', gameStatus);
-  }
+  };
 
   socket.on('unirse-partida', unirseAPartida);
-}
+};
 
 module.exports = joinGameHandler;

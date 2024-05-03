@@ -51,18 +51,18 @@ const playerPieces = async (req, res) => {
     const resultados = await getPlayerPieces();
     const player1 = resultados
       .slice(0,4)
-      .map(p => ({...p, valores: textToArray(p.valores)}));
-    
+      .map(p => ({ ...p, valores: textToArray(p.valores) }));
+
     const player2 = resultados
       .slice(4,8)
-      .map(p => ({...p, valores: textToArray(p.valores)}));
-    
+      .map(p => ({ ...p, valores: textToArray(p.valores) }));
+
     const idsToDeleteP1 = player1.map(p => p.id);
     const idsToDeleteP2 = player2.map(p => p.id);
 
     const idsToDelete = [...idsToDeleteP1, ...idsToDeleteP2];
 
-    const str_query = '(' + idsToDelete.map(p => '?').join(',') + ')';
+    const str_query = '(' + idsToDelete.map(() => '?').join(',') + ')';
 
     res.status(200).send({ player1, player2, idsToDelete, str_query });
   } catch(e) {
@@ -90,4 +90,4 @@ module.exports = {
   pieceById,
   removePieces,
   playerPieces,
-}
+};

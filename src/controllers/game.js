@@ -68,7 +68,7 @@ const joinToGame = async (req, res) => {
 
     const deckStatus = await initializeDeck(gameId);
 
-    res.status(200).send({resultado, deckStatus});
+    res.status(200).send({ resultado, deckStatus });
   } catch(e) {
     console.log(e?.message);
     res.status(500).send({ errMessage: e?.message });
@@ -86,19 +86,19 @@ const playerPieces = async (req, res) => {
 
     const player1 = resultados
       .slice(0,8)
-      .map(p => ({...p, valores: textToArray(p.valores)}));
-    
+      .map(p => ({ ...p, valores: textToArray(p.valores) }));
+
     const player2 = resultados
       .slice(8,16)
-      .map(p => ({...p, valores: textToArray(p.valores)}));
-    
-    const idsToP1 = player1.map(p => p.piece_id);
-    const idsPieces1 = "('" + idsToP1.join("', '") + "')";
-    const idsToP2 = player2.map(p => p.piece_id);
-    const idsPieces2 = "('" + idsToP2.join("', '") + "')";
+      .map(p => ({ ...p, valores: textToArray(p.valores) }));
 
-    const q1 = await changeOwner('player1', partida, idsPieces1);
-    const q2 = await changeOwner('player2', partida, idsPieces2);
+    const idsToP1 = player1.map(p => p.piece_id);
+    const idsPieces1 = '("' + idsToP1.join('", "') + '")';
+    const idsToP2 = player2.map(p => p.piece_id);
+    const idsPieces2 = '("' + idsToP2.join('", "') + '")';
+
+    await changeOwner('player1', partida, idsPieces1);
+    await changeOwner('player2', partida, idsPieces2);
 
     res.status(200).send({ player1, player2 });
   } catch(e) {
@@ -124,7 +124,7 @@ const getBoardStatus = async (req, res) => {
 
 const addPiece = async (req, res) => {
   const { piece_id, partida, playerRole } = req.body;
-  const ids = "('" + piece_id + "')";
+  const ids = '("' + piece_id + '")';
 
   try {
     const posiciones = await boardPosiciones(partida);
@@ -134,12 +134,12 @@ const addPiece = async (req, res) => {
     const canAdd = addPiezaIsPossible(posiciones, textToArray(piece.valores));
 
     if (canAdd) {
-      const q1 = await changeOwner('board', partida, ids);
+      await changeOwner('board', partida, ids);
     } else {
       const deck = await getPieceByOwner('deck', partida);
       if (deck.length > 0) {
-        const newId = "('" + deck[0].piece_id + "')";
-        const q2 = await changeOwner(playerRole, partida, newId);
+        const newId = '("' + deck[0].piece_id + '")';
+        await changeOwner(playerRole, partida, newId);
       }
     }
     const playerPieces = await getPieceByOwner(playerRole, partida);
@@ -148,7 +148,7 @@ const addPiece = async (req, res) => {
     const gameInProgress = playerPieces.length > 0;
 
     res.status(200).send({
-      playerPieces: playerPieces.map(p => ({...p, valores: textToArray(p.valores)})),
+      playerPieces: playerPieces.map(p => ({ ...p, valores: textToArray(p.valores) })),
       board: newPositions,
       gameInProgress,
     });
@@ -163,8 +163,7 @@ const resetGameDeck = async (req, res) => {
   if (!partida) return res.status(400).send({ msg: 'Game ID required!' });
 
   try {
-    const q1 = await emptyDeck(partida);
-    // console.log(q1);
+    await emptyDeck(partida);
     const resultado = await initializeDeck(partida);
 
     res.status(200).send(resultado);
@@ -181,4 +180,4 @@ module.exports = {
   playerPieces,
   addPiece,
   getBoardStatus,
-}
+};

@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const DB_NAME = './data/myDatabase.db';
 const { generarId, arrayToText } = require('./src/utils/general');
 const { TOTAL_PIECES } = require('./src/utils/constants');
- 
+
 const CREATE_TABLES_QUERY = `
   CREATE TABLE IF NOT EXISTS game_data (
     id TEXT PRIMARY KEY UNIQUE,
@@ -32,12 +32,12 @@ const db = new sqlite3.Database(DB_NAME, (err) => {
       } else {
         console.log('Tablas creadas exitosamente o ya existen');
       }
-    })
+    });
   }
 });
 
 const getTables = () => {
-  const TABLES_QUERY = `SELECT * FROM sqlite_master WHERE type='table'`
+  const TABLES_QUERY = 'SELECT * FROM sqlite_master WHERE type="table"';
 
   return new Promise((resolve, reject) => {
     db.all(TABLES_QUERY, (err, rows) => {
@@ -46,12 +46,12 @@ const getTables = () => {
       } else {
         return resolve(rows);
       }
-    })
-  })
+    });
+  });
 };
 
 const getPieces = () => {
-  const GET_PIECES = `SELECT * FROM game_pieces`;
+  const GET_PIECES = 'SELECT * FROM game_pieces';
   return new Promise((resolve, reject) => {
     db.all(GET_PIECES, (err, rows) => {
       if(err) {
@@ -59,12 +59,12 @@ const getPieces = () => {
       } else {
         return resolve(rows);
       }
-    })
+    });
   });
 };
 
 const boardStatus = (partida) => {
-  const BOARD_QUERY = `SELECT * FROM game_pieces WHERE owner='board' AND partida=?`;
+  const BOARD_QUERY = 'SELECT * FROM game_pieces WHERE owner="board" AND partida=?';
 
   return new Promise((resolve, reject) => {
     db.all(BOARD_QUERY, [partida], (err, rows) => {
@@ -78,7 +78,7 @@ const boardStatus = (partida) => {
 };
 
 const getPieceById = (id) => {
-  const GET_PIECE_BY_ID = `SELECT * FROM game_pieces WHERE piece_id=?`;
+  const GET_PIECE_BY_ID = 'SELECT * FROM game_pieces WHERE piece_id=?';
   return new Promise((resolve, reject) => {
     db.all(GET_PIECE_BY_ID, [id], (err, rows) => {
       if(err) {
@@ -91,7 +91,7 @@ const getPieceById = (id) => {
 };
 
 const getPieceByOwner = (owner, partida) => {
-  const GET_PIECE_BY_OWNER = `SELECT id, piece_id, tipo, valores, owner FROM game_pieces WHERE owner=? and partida=?`;
+  const GET_PIECE_BY_OWNER = 'SELECT id, piece_id, tipo, valores, owner FROM game_pieces WHERE owner=? and partida=?';
   return new Promise((resolve, reject) => {
     db.all(GET_PIECE_BY_OWNER, [owner, partida], (err, rows) => {
       if(err) {
@@ -104,7 +104,7 @@ const getPieceByOwner = (owner, partida) => {
 };
 
 const getPlayerPieces = (gameId) => {
-  const GET_PLAYER_PIECES = `SELECT * FROM game_pieces WHERE partida=? ORDER BY RANDOM() LIMIT 16`;
+  const GET_PLAYER_PIECES = 'SELECT * FROM game_pieces WHERE partida=? ORDER BY RANDOM() LIMIT 16';
   return new Promise((resolve, reject) => {
     db.all(GET_PLAYER_PIECES, [gameId], (err, rows) => {
       if(err) {
@@ -112,36 +112,36 @@ const getPlayerPieces = (gameId) => {
       } else {
         return resolve(rows);
       }
-    })
+    });
   });
 };
 
 const insertPiece = (piece) => {
   const { tipo, valores } = piece;
   const id = generarId();
-  const INSERT_QUERY = `INSERT INTO game_pieces (id, tipo, valores) VALUES (?, ?, ?)`;
-  
+  const INSERT_QUERY = 'INSERT INTO game_pieces (id, tipo, valores) VALUES (?, ?, ?)';
+
   return new Promise((resolve, reject) => {
     db.run(INSERT_QUERY, [id, tipo, valores], function(err) {
       if (err) {
-        return reject(err)
+        return reject(err);
       } else {
-        return resolve({ id, tipo, valores, lastId: this.lastID })
+        return resolve({ id, tipo, valores, lastId: this.lastID });
       }
-    })
+    });
   });
 };
 
 const deleteAllPieces = () => {
-  const DELETE_ALL_QUERY = `DELETE FROM game_pieces`;
+  const DELETE_ALL_QUERY = 'DELETE FROM game_pieces';
   return new Promise((resolve, reject) => {
     db.run(DELETE_ALL_QUERY, (err) => {
       if (err) {
         return reject(err);
       } else {
-        return resolve({ message: 'table empty'});
+        return resolve({ message: 'table empty' });
       }
-    })
+    });
   });
 };
 
@@ -154,13 +154,13 @@ const changeOwner = (owner, partida, ids) => {
       } else {
         return resolve(true);
       }
-    })
+    });
   });
 };
 
 const initializeDeck = (partida) => {
-  const INSERT_QUERY = `INSERT INTO game_pieces (piece_id, tipo, valores, owner, partida) VALUES (?, ?, ?, ?, ?)`;
-  
+  const INSERT_QUERY = 'INSERT INTO game_pieces (piece_id, tipo, valores, owner, partida) VALUES (?, ?, ?, ?, ?)';
+
   return new Promise((resolve, reject) => {
     const stmt = db.prepare(INSERT_QUERY);
     for(let i = 0; i < TOTAL_PIECES.length; i++) {
@@ -180,30 +180,30 @@ const initializeDeck = (partida) => {
 };
 
 const emptyDeck = (partida) => {
-  const DELETE_QUERY = `DELETE FROM game_pieces WHERE partida=?`;
+  const DELETE_QUERY = 'DELETE FROM game_pieces WHERE partida=?';
   return new Promise((resolve, reject) => {
     db.run(DELETE_QUERY,[partida], function(err) {
       if(err) {
         reject(err);
       } else {
-        resolve({ message: `Deck vaciado. Game ID: ${partida}.` })
+        resolve({ message: `Deck vaciado. Game ID: ${partida}.` });
       }
     });
   });
 };
 
 const emptyGame = (partida) => {
-  const DELETE_QUERY = `DELETE FROM game_data WHERE game_id=?`;
+  const DELETE_QUERY = 'DELETE FROM game_data WHERE game_id=?';
   return new Promise((resolve, reject) => {
     db.run(DELETE_QUERY,[partida], function(err) {
       if(err) {
         reject(err);
       } else {
-        resolve({ message: `Partida finalizada. Game ID: ${partida}.` })
+        resolve({ message: `Partida finalizada. Game ID: ${partida}.` });
       }
     });
   });
-}
+};
 
 const initializeGame = ({ playerId, playerName, playerRole, gameId }) => {
   const INSERT_QUERY = `
@@ -215,7 +215,7 @@ const initializeGame = ({ playerId, playerName, playerRole, gameId }) => {
     db.run(INSERT_QUERY, [playerId, gameId, playerName, playerRole],
       function(err) {
         if(err) {
-          return reject(err)
+          return reject(err);
         } else {
           return resolve({
             playerId,
@@ -223,15 +223,15 @@ const initializeGame = ({ playerId, playerName, playerRole, gameId }) => {
             playerRole,
             gameId,
             lastID: this.lastID,
-          })
+          });
         }
       }
-    )
+    );
   });
 };
 
 const getGamesByPlayerName = (playerName) => {
-  const GET_GAMES_BY_PLAYER_NAME = `SELECT * FROM game_data WHERE player_name=?`;
+  const GET_GAMES_BY_PLAYER_NAME = 'SELECT * FROM game_data WHERE player_name=?';
   return new Promise((resolve, reject) => {
     db.all(GET_GAMES_BY_PLAYER_NAME, [playerName], (err, rows) => {
       if(err) {
@@ -244,7 +244,7 @@ const getGamesByPlayerName = (playerName) => {
 };
 
 const getGamesByGameId = (gameId) => {
-  const GET_GAMES_BY_GAME_ID = `SELECT * FROM game_data WHERE game_id=?`;
+  const GET_GAMES_BY_GAME_ID = 'SELECT * FROM game_data WHERE game_id=?';
   return new Promise((resolve, reject) => {
     db.all(GET_GAMES_BY_GAME_ID, [gameId], (err, rows) => {
       if(err) {
@@ -254,7 +254,7 @@ const getGamesByGameId = (gameId) => {
       }
     });
   });
-}
+};
 
 module.exports = {
   db,

@@ -17,4 +17,4 @@ const boardPosiciones = async (partida) => {
 
 module.exports = {
   boardPosiciones,
-}
+};
