@@ -17,7 +17,8 @@ const CREATE_TABLES_QUERY = `
     tipo TEXT,
     valores TEXT,
     owner TEXT,
-    partida TEXT
+    partida TEXT,
+    updated_at TEXT
   );
 `;
 
@@ -91,7 +92,7 @@ const getPieceById = (id) => {
 };
 
 const getPieceByOwner = (owner, partida) => {
-  const GET_PIECE_BY_OWNER = 'SELECT id, piece_id, tipo, valores, owner FROM game_pieces WHERE owner=? and partida=?';
+  const GET_PIECE_BY_OWNER = 'SELECT id, piece_id, tipo, valores, owner FROM game_pieces WHERE owner=? and partida=? ORDER BY updated_at ASC';
   return new Promise((resolve, reject) => {
     db.all(GET_PIECE_BY_OWNER, [owner, partida], (err, rows) => {
       if(err) {
@@ -119,10 +120,11 @@ const getPlayerPieces = (gameId) => {
 const insertPiece = (piece) => {
   const { tipo, valores } = piece;
   const id = generarId();
-  const INSERT_QUERY = 'INSERT INTO game_pieces (id, tipo, valores) VALUES (?, ?, ?)';
+  const updatedAt = new Date().toISOString();
+  const INSERT_QUERY = 'INSERT INTO game_pieces (id, tipo, valores, updated_at) VALUES (?, ?, ?, ?)';
 
   return new Promise((resolve, reject) => {
-    db.run(INSERT_QUERY, [id, tipo, valores], function(err) {
+    db.run(INSERT_QUERY, [id, tipo, valores, updatedAt], function(err) {
       if (err) {
         return reject(err);
       } else {
@@ -146,7 +148,8 @@ const deleteAllPieces = () => {
 };
 
 const changeOwner = (owner, partida, ids) => {
-  const UPDATE_QUERY = `UPDATE game_pieces SET owner='${owner}' WHERE partida='${partida}' AND piece_id IN ${ids}`;
+  const updatedAt = new Date().toISOString();
+  const UPDATE_QUERY = `UPDATE game_pieces SET owner='${owner}', updated_at='${updatedAt}' WHERE partida='${partida}' AND piece_id IN ${ids}`;
   return new Promise((resolve, reject) => {
     db.run(UPDATE_QUERY, (err) => {
       if(err) {
@@ -159,13 +162,14 @@ const changeOwner = (owner, partida, ids) => {
 };
 
 const initializeDeck = (partida) => {
-  const INSERT_QUERY = 'INSERT INTO game_pieces (piece_id, tipo, valores, owner, partida) VALUES (?, ?, ?, ?, ?)';
+  const updatedAt = new Date().toISOString();
+  const INSERT_QUERY = 'INSERT INTO game_pieces (piece_id, tipo, valores, owner, partida, updated_at) VALUES (?, ?, ?, ?, ?, ?)';
 
   return new Promise((resolve, reject) => {
     const stmt = db.prepare(INSERT_QUERY);
     for(let i = 0; i < TOTAL_PIECES.length; i++) {
       const valores = arrayToText(TOTAL_PIECES[i].valores);
-      stmt.run([TOTAL_PIECES[i].id, TOTAL_PIECES[i].tipo, valores, 'deck', partida], (err) => {
+      stmt.run([TOTAL_PIECES[i].id, TOTAL_PIECES[i].tipo, valores, 'deck', partida, updatedAt], (err) => {
         if (err) return reject(err);
       });
     }

@@ -4,8 +4,6 @@ const {
   getGamesByGameId,
   getPieceById,
   initializeDeck,
-  getPlayerPieces,
-  getPieceByOwner,
   boardStatus,
   changeOwner,
   emptyDeck,
@@ -13,6 +11,7 @@ const {
 const { generarId, textToArray } = require('../utils/general');
 const { addPiezaIsPossible } = require('../utils/funciones');
 const { boardPosiciones } = require('../helpers/board');
+const { playerPieces: allPieces, piecesByOwner } = require('../helpers/pieces');
 
 const startGame = async (req, res) => {
   const { playerName } = req.body;
@@ -80,17 +79,12 @@ const playerPieces = async (req, res) => {
   const { partida } = req.params;
 
   try {
-    const resultados = await getPlayerPieces(partida);
+    const resultados = await allPieces(partida);
 
     if (!resultados.every(p => p.owner === 'deck')) return res.status(400).send({ msg: `Las piezas ya fueron repartidas! Game ID: ${partida}` });
 
-    const player1 = resultados
-      .slice(0,8)
-      .map(p => ({ ...p, valores: textToArray(p.valores) }));
-
-    const player2 = resultados
-      .slice(8,16)
-      .map(p => ({ ...p, valores: textToArray(p.valores) }));
+    const player1 = resultados.slice(0,8);
+    const player2 = resultados.slice(8,16);
 
     const idsToP1 = player1.map(p => p.piece_id);
     const idsPieces1 = '("' + idsToP1.join('", "') + '")';
@@ -136,19 +130,19 @@ const addPiece = async (req, res) => {
     if (canAdd) {
       await changeOwner('board', partida, ids);
     } else {
-      const deck = await getPieceByOwner('deck', partida);
+      const deck = await piecesByOwner('deck', partida);
       if (deck.length > 0) {
         const newId = '("' + deck[0].piece_id + '")';
         await changeOwner(playerRole, partida, newId);
       }
     }
-    const playerPieces = await getPieceByOwner(playerRole, partida);
+    const playerPieces = await piecesByOwner(playerRole, partida);
     const newPositions = await boardPosiciones(partida);
 
     const gameInProgress = playerPieces.length > 0;
 
     res.status(200).send({
-      playerPieces: playerPieces.map(p => ({ ...p, valores: textToArray(p.valores) })),
+      playerPieces,
       board: newPositions,
       gameInProgress,
     });

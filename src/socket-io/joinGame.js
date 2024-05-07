@@ -2,11 +2,10 @@ const { generarId } = require('../utils/general');
 const {
   initializeGame,
   initializeDeck,
-  getPlayerPieces,
   getGamesByGameId,
   changeOwner,
 } = require('../../database');
-const { textToArray } = require('../utils/general');
+const { playerPieces } = require('../helpers/pieces');
 
 const joinGameHandler = (io, socket) => {
   const unirseAPartida = async (playerName, partida) => {
@@ -16,13 +15,10 @@ const joinGameHandler = (io, socket) => {
 
     await initializeGame({ playerId, playerName, playerRole, gameId: partida });
     await initializeDeck(partida);
-    const deck = await getPlayerPieces(partida);
+    const deck = await playerPieces(partida);
 
-    const p1pieces = deck.slice(0,8)
-      .map(p => ({ ...p, valores: textToArray(p.valores) }));
-
-    const p2pieces = deck.slice(8,16)
-      .map(p => ({ ...p, valores: textToArray(p.valores) }));
+    const p1pieces = deck.slice(0,8);
+    const p2pieces = deck.slice(8,16);
 
     const idsToP1 = p1pieces.map(p => p.piece_id);
     const idsPieces1 = '("' + idsToP1.join('", "') + '")';
