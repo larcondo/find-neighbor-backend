@@ -8,7 +8,8 @@ const CREATE_TABLES_QUERY = `
     id TEXT PRIMARY KEY UNIQUE,
     game_id TEXT,
     player_role TEXT,
-    player_name TEXT
+    player_name TEXT,
+    created_at TEXT
   );
 
   CREATE TABLE IF NOT EXISTS game_pieces (
@@ -18,6 +19,7 @@ const CREATE_TABLES_QUERY = `
     valores TEXT,
     owner TEXT,
     partida TEXT,
+    created_at TEXT,
     updated_at TEXT
   );
 `;
@@ -106,14 +108,25 @@ const changeOwner = (owner, partida, ids) => {
 };
 
 const initializeDeck = (partida) => {
+  const createdAt = new Date().toISOString();
   const updatedAt = new Date().toISOString();
-  const INSERT_QUERY = 'INSERT INTO game_pieces (piece_id, tipo, valores, owner, partida, updated_at) VALUES (?, ?, ?, ?, ?, ?)';
+  const INSERT_QUERY = `INSERT INTO
+  game_pieces (piece_id, tipo, valores, owner, partida, created_at, updated_at)
+  VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
   return new Promise((resolve, reject) => {
     const stmt = db.prepare(INSERT_QUERY);
     for(let i = 0; i < TOTAL_PIECES.length; i++) {
       const valores = arrayToText(TOTAL_PIECES[i].valores);
-      stmt.run([TOTAL_PIECES[i].id, TOTAL_PIECES[i].tipo, valores, 'deck', partida, updatedAt], (err) => {
+      stmt.run([
+        TOTAL_PIECES[i].id,
+        TOTAL_PIECES[i].tipo,
+        valores,
+        'deck',
+        partida,
+        createdAt,
+        updatedAt
+      ], (err) => {
         if (err) return reject(err);
       });
     }
@@ -154,26 +167,34 @@ const emptyGame = (partida) => {
 };
 
 const initializeGame = ({ playerId, playerName, playerRole, gameId }) => {
+  const createdAt = new Date().toISOString();
   const INSERT_QUERY = `
-    INSERT INTO game_data (id, game_id, player_name, player_role)
-    VALUES (?, ?, ?, ?)
+    INSERT INTO game_data
+    (id, game_id, player_name, player_role, created_at)
+    VALUES (?, ?, ?, ?, ?)
   `;
 
   return new Promise((resolve, reject) => {
-    db.run(INSERT_QUERY, [playerId, gameId, playerName, playerRole],
-      function(err) {
-        if(err) {
-          return reject(err);
-        } else {
-          return resolve({
-            playerId,
-            playerName,
-            playerRole,
-            gameId,
-            lastID: this.lastID,
-          });
-        }
+    db.run(INSERT_QUERY, [
+      playerId,
+      gameId,
+      playerName,
+      playerRole,
+      createdAt
+    ],
+    function(err) {
+      if(err) {
+        return reject(err);
+      } else {
+        return resolve({
+          playerId,
+          playerName,
+          playerRole,
+          gameId,
+          lastID: this.lastID,
+        });
       }
+    }
     );
   });
 };
